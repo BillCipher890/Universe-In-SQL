@@ -5,45 +5,46 @@ using UnityEngine;
 public class CardPlacer : MonoBehaviour
 {
     [SerializeField] private CardData[] startCardData;
-    [SerializeField] private GameObject card;
-    private Camera mainCamera;
+    [SerializeField] private GameObject cardPrefub;
 
     void Start()
     {
-        mainCamera = Camera.main;
-        CardPlace();
-        BoxColliderReplace();
+        Camera mainCamera = Camera.main;
+        transform.position = mainCamera.transform.position;
 
-        Debug.Log(startCardData[0].CardName);
-        Debug.Log(startCardData[0].Type);
-        for(int i = 0; i < startCardData[0].callingCardData.Length; i++)
-            Debug.Log(startCardData[0].callingCardData[i].CardName);
+        CardPlace(startCardData, mainCamera, cardPrefub, transform);
+        BoxColliderReplace(mainCamera);
     }
 
-    // Update is called once per frame
     void Update()
     {
 
     }
 
-    void CardPlace()
+    public void CardPlace(CardData[] cards, Camera mainCamera, GameObject card, Transform parrent)
     {
-        transform.position = mainCamera.transform.position;
+        for(int i = 0; i < cards.Length; i++)
+        {
+            var currentCard = Instantiate(card, 
+                mainCamera.transform.position + 3 * mainCamera.transform.forward - new Vector3((1 - cards.Length + 2 * i) / 4f, 1, 1),
+                mainCamera.transform.rotation, parrent);
 
-        var currentCard = Instantiate(card, mainCamera.transform.position + 3 * mainCamera.transform.forward - new Vector3(-0.5f, 1, 1), mainCamera.transform.rotation, transform);
-        currentCard.GetComponent<CardController>().currentCardType = CardController.CardType.Action;
-        currentCard.GetComponent<CardController>().text = "SELECT";
-
-        currentCard = Instantiate(card, mainCamera.transform.position + 3 * mainCamera.transform.forward - new Vector3(0f, 1, 1), mainCamera.transform.rotation, transform);
-        currentCard.GetComponent<CardController>().currentCardType = CardController.CardType.Table;
-        currentCard.GetComponent<CardController>().text = "Table";
-
-        currentCard = Instantiate(card, mainCamera.transform.position + 3 * mainCamera.transform.forward - new Vector3(0.5f, 1, 1), mainCamera.transform.rotation, transform);
-        currentCard.GetComponent<CardController>().currentCardType = CardController.CardType.Element;
-        currentCard.GetComponent<CardController>().text = "Element";
+            currentCard.name = cards[i].CardName;
+            currentCard.GetComponent<CardController>().engName = cards[i].CardName;
+            currentCard.GetComponent<CardController>().rusName = cards[i].RusCardName;
+            if (cards[i].CardName == "FROM" || cards[i].CardName == "WHERE" || (cards[i].CardName == ";" && cards[i + 1].CardName == "WHERE"))
+            {
+                currentCard.GetComponent<CardController>().currentCardType = CardController.CardType.Deactivated;
+            }
+            else
+            {
+                currentCard.GetComponent<CardController>().currentCardType = cards[i].Type;
+            }
+            currentCard.GetComponent<CardController>().cardData = cards[i];
+        }
     }
 
-    void BoxColliderReplace()
+    void BoxColliderReplace(Camera mainCamera)
     {
         transform.GetComponent<BoxCollider>().center = 3 * mainCamera.transform.forward - new Vector3(0, -1, -1);
     }

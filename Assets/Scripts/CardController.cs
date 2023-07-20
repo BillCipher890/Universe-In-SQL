@@ -7,23 +7,32 @@ public class CardController : MonoBehaviour
     {
         Action,
         Table,
-        Element
+        Element,
+        Condition,
+        Deactivated
     }
     public CardType currentCardType;
 
-    public string text;
+    public string engName;
+    public string rusName;
 
-    public TMP_Text TMP_Text;
+    public TMP_Text TMP_Text_EngName;
+    public TMP_Text TMP_Text_RusName;
     public MeshRenderer mesh;
 
     public Material actionMaterial;
     public Material tableMaterial;
     public Material elementMaterial;
+    public Material conditionMaterial;
+    public Material deactivatedMaterial;
+
+    public CardData cardData;
 
     // Start is called before the first frame update
     void Start()
     {
-        TMP_Text.text = text;
+        TMP_Text_EngName.text = engName;
+        TMP_Text_RusName.text = rusName;
     }
 
     // Update is called once per frame
@@ -40,6 +49,14 @@ public class CardController : MonoBehaviour
         else if (currentCardType.Equals(CardType.Element))
         {
             mesh.material = elementMaterial;
+        }
+        else if (currentCardType.Equals(CardType.Condition))
+        {
+            mesh.material = conditionMaterial;
+        }
+        else if (currentCardType.Equals(CardType.Deactivated))
+        {
+            mesh.material = deactivatedMaterial;
         }
         else
         {

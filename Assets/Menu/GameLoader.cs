@@ -16,7 +16,6 @@ public class GameLoader
 
     public void loadLevel(int lvl)
     {
-        Debug.Log("Load scene " + lvl);
         SceneManager.LoadScene(lvl);
     }
 

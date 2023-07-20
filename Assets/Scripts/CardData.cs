@@ -1,16 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using static CardController;
 
 [CreateAssetMenu(menuName = "Card", fileName = "New Card")]
 public class CardData : ScriptableObject
 {
-    [Tooltip("Name")]
+    [Tooltip("English_Name")]
     [SerializeField] private string cardName;
     public string CardName
     {
         get { return cardName; }
+        protected set { }
+    }
+
+    [Tooltip("Russian_Name")]
+    [SerializeField] private string rusCardName;
+    public string RusCardName
+    {
+        get { return rusCardName; }
         protected set { }
     }
 

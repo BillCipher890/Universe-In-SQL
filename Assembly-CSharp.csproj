@@ -56,25 +56,41 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\QuickOutline\Scripts\Outline.cs" />
+    <Compile Include="Assets\Prefubs\Level 0\LevelControllerLevel0.cs" />
+    <Compile Include="Assets\Scripts\CardData.cs" />
     <Compile Include="Assets\Learn\Learn\Card\CardChooser.cs" />
+    <Compile Include="Assets\Prefubs\Level 1\QuestControllerLVL1.cs" />
+    <Compile Include="Assets\Prefubs\Level 1\Student\CanvasController.cs" />
     <Compile Include="Assets\Learn\Learn\AutoDrones\DronesController.cs" />
+    <Compile Include="Assets\Prefubs\Level 0\RemoveFigure.cs" />
     <Compile Include="Assets\Scripts\CardPlacer.cs" />
     <Compile Include="Assets\Menu\MenuController.cs" />
+    <Compile Include="Assets\Prefubs\Level 0\UpdateButton.cs" />
+    <Compile Include="Assets\Prefubs\Level 0\OutlineController.cs" />
     <Compile Include="Assets\Scripts\CardMover.cs" />
     <Compile Include="Assets\Learn\Learn\GameLoaderLearn.cs" />
+    <Compile Include="Assets\Prefubs\Level 1\Student\StudentController.cs" />
+    <Compile Include="Assets\Scripts\LevelData.cs" />
     <Compile Include="Assets\Scripts\LevelController.cs" />
+    <Compile Include="Assets\Prefubs\Level 0\BlueChange.cs" />
     <Compile Include="Assets\Learn\Learn\Prefubs\Path\PathPointTime.cs" />
+    <Compile Include="Assets\Prefubs\Level 1\Student\FacultyController.cs" />
+    <Compile Include="Assets\Prefubs\Level 1\FlagController.cs" />
+    <Compile Include="Assets\SimpleScreenshoter\SimpleScreenshoter.cs" />
     <Compile Include="Assets\Learn\Learn\Card\CardPlacerLearn.cs" />
     <Compile Include="Assets\Scripts\LevelMenuController.cs" />
+    <Compile Include="Assets\Prefubs\Level 1\Level_1_Controller.cs" />
+    <Compile Include="Assets\Prefubs\Level 0\EventManager.cs" />
     <Compile Include="Assets\Learn\Learn\SimpleBotController.cs" />
     <Compile Include="Assets\Learn\Learn\AutoDrones\PlayerController.cs" />
     <Compile Include="Assets\Learn\Learn\BotChanger.cs" />
     <Compile Include="Assets\Learn\Learn\Card\CardTuner.cs" />
+    <Compile Include="Assets\Prefubs\Level 1\EventManagerLevel1.cs" />
     <Compile Include="Assets\Scripts\CardController.cs" />
     <Compile Include="Assets\Menu\GameLoader.cs" />
     <Compile Include="Assets\Learn\Learn\Card\CameraObjectReplacer.cs" />
-    <Compile Include="Assets\QuickOutline\Scripts\Outline.cs" />
-    <Compile Include="Assets\Scripts\CardData.cs" />
+    <Compile Include="Assets\Prefubs\Level 0\InsertFigureButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -787,8 +803,14 @@
     <Reference Include="Unity.EditorCoroutines.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.EditorCoroutines.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Cinemachine">
+      <HintPath>Library\ScriptAssemblies\Cinemachine.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Services.Core.Analytics">
       <HintPath>Library\ScriptAssemblies\Unity.Services.Core.Analytics.dll</HintPath>
+    </Reference>
+    <Reference Include="com.unity.cinemachine.editor">
+      <HintPath>Library\ScriptAssemblies\com.unity.cinemachine.editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.Shared.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Shared.Editor.dll</HintPath>
@@ -804,12 +826,6 @@
     </Reference>
     <Reference Include="Unity.VisualScripting.State">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.State.dll</HintPath>
-    </Reference>
-    <Reference Include="com.unity.cinemachine.editor">
-      <HintPath>Library\ScriptAssemblies\com.unity.cinemachine.editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Cinemachine">
-      <HintPath>Library\ScriptAssemblies\Cinemachine.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

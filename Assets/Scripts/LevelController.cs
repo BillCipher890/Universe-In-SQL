@@ -26,4 +26,10 @@ public class LevelController : MonoBehaviour
             Debug.LogError("PlayerPrefs has no key LastSceneIndex");
         }
     }
+
+    public void MainMenu()
+    {
+        GameLoader gameLoader = new GameLoader();
+        gameLoader.loadMenu();
+    }
 }

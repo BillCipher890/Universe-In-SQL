@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using static CardPlacer;
+using System;
 
 public class CardMover : MonoBehaviour
 {
@@ -30,23 +33,30 @@ public class CardMover : MonoBehaviour
 
     private void OnMouseDown()
     {
-        isMoving = true;
+        if (gameObject.GetComponent<CardController>().currentCardType != CardController.CardType.Deactivated)
+        {
+            isMoving = true;
 
-        dragPlane = new Plane(mainCamera.transform.forward, transform.position);
-        Ray cameraRay = mainCamera.ScreenPointToRay(Input.mousePosition);
+            //Создание плоскости, вдоль которой двигается карточка
+            dragPlane = new Plane(mainCamera.transform.forward, transform.position);
+            Ray cameraRay = mainCamera.ScreenPointToRay(Input.mousePosition);
 
-        float planeDistance;
-        dragPlane.Raycast(cameraRay, out planeDistance);
-        offset = transform.position - cameraRay.GetPoint(planeDistance);
+            float planeDistance;
+            dragPlane.Raycast(cameraRay, out planeDistance);
+            offset = transform.position - cameraRay.GetPoint(planeDistance);
+        }
     }
 
     private void OnMouseDrag()
     {
-        Ray cameraRay = mainCamera.ScreenPointToRay(Input.mousePosition);
+        if (gameObject.GetComponent<CardController>().currentCardType != CardController.CardType.Deactivated)
+        {
+            Ray cameraRay = mainCamera.ScreenPointToRay(Input.mousePosition);
 
-        float planeDistance;
-        dragPlane.Raycast(cameraRay, out planeDistance);
-        transform.position = cameraRay.GetPoint(planeDistance) + offset;
+            float planeDistance;
+            dragPlane.Raycast(cameraRay, out planeDistance);
+            transform.position = cameraRay.GetPoint(planeDistance) + offset;
+        }
     }
 
     private void OnMouseUp()
@@ -54,9 +64,73 @@ public class CardMover : MonoBehaviour
         isMoving = false;
         if (inTrigger)
         {
+            CardPlacer cp = transform.parent.GetComponent<CardPlacer>();
+
+            FillRequest();
+
+            ActivateActionCards();
+
+            var cardController = transform.GetComponent<CardController>();
+
+            if (cardController.currentCardType == CardController.CardType.Action ||
+                cardController.currentCardType == CardController.CardType.Condition)
+            {
+                for(int i = 0; i < transform.parent.childCount; i++)
+                {
+                    if (transform.parent.GetChild(i).name != gameObject.name)
+                        transform.parent.GetChild(i).gameObject.SetActive(false);
+                }
+            }
+
+            var cardData = gameObject.GetComponent<CardController>().cardData;
+
+            cp.CardPlace(cardData.callingCardData, mainCamera, gameObject, transform.parent);
+
+            SendCardName(cardData.CardName);
+            
+            if(cardData.CardName == ";")
+            {
+                EventManagerLevel1.sendSemicolonUsed();
+            }
+
             gameObject.SetActive(false);
-            //transform.GetComponent<>
         }
+    }
+
+    private void SendCardName(string name)
+    {
+        var goArray = gameObject.scene.GetRootGameObjects();
+        for(int i = 0; i < goArray.Length; i++)
+        {
+            if(goArray[i].name == "LevelController")
+            {
+                goArray[i].GetComponent<LevelData>().usedCardName = name;
+            }
+        }
+    }
+
+    private void ActivateActionCards()
+    {
+        if (gameObject.GetComponent<CardController>().currentCardType != CardController.CardType.Action)
+        {
+            for (int i = 0; i < transform.parent.childCount; i++)
+            {
+                if (transform.parent.GetChild(i).GetComponent<CardController>().cardData.Type == CardController.CardType.Action)
+                {
+                    transform.parent.GetChild(i).GetComponent<CardController>().currentCardType = CardController.CardType.Action;
+                }
+            }
+        }
+    }
+
+    private void FillRequest()
+    {
+        TMP_Text Request = GameObject.Find("Request").GetComponent<TMP_Text>();
+        if (gameObject.name == "SELECT")
+        {
+            Request.text = "";
+        }
+        Request.text += gameObject.name + " ";
     }
 
     private void Update()
@@ -80,12 +154,10 @@ public class CardMover : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         inTrigger = true;
-        Debug.Log("Enter trigger");
     }
 
     private void OnTriggerExit(Collider other)
     {
         inTrigger = false;
-        Debug.Log("Exit trigger");
     }
 }

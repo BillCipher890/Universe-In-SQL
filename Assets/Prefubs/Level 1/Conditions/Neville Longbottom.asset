@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b03aa0e6eeb3134fa1cb72d2f816e27, type: 3}
+  m_Name: Neville Longbottom
+  m_EditorClassIdentifier: 
+  cardName: '"Neville Longbottom"'
+  rusCardName: "\"\u041D\u0435\u0432\u0438\u043B\u043B \u0414\u043E\u043B\u0433\u043E\u043F\u0443\u043F\u0441\""
+  type: 3
+  callingCardData:
+  - {fileID: 11400000, guid: 2e3d607e0b445fa48a16485f3c65f792, type: 2}
+  - {fileID: 11400000, guid: 8f53d11de624bd84e99489d404731ec4, type: 2}
+  - {fileID: 11400000, guid: 52954b1134f486b478e414e32d8fce6d, type: 2}

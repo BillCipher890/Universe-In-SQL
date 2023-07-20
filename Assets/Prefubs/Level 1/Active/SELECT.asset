@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b03aa0e6eeb3134fa1cb72d2f816e27, type: 3}
+  m_Name: SELECT
+  m_EditorClassIdentifier: 
+  cardName: SELECT
+  rusCardName: "\u0412\u042B\u0411\u0420\u0410\u0422\u042C"
+  type: 0
+  callingCardData:
+  - {fileID: 11400000, guid: 98cf1257e0527514dadf611dbd7270e2, type: 2}
+  - {fileID: 11400000, guid: 26e34ad7081fb4744b66a1f59f2881da, type: 2}
+  - {fileID: 11400000, guid: d98c0f78df8f52a408b4816a28008d1b, type: 2}
